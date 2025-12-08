@@ -1,11 +1,14 @@
-package com.example.Advances.Banking.System.accounts;
+package com.example.Advances.Banking.System.accounts.Accounts.AccountsTypes;
 
-public class SavingAccount extends Account{
+import com.example.Advances.Banking.System.accounts.Accounts.Entity.Account;
+import com.example.Advances.Banking.System.accounts.Accounts.Entity.enAccountStatus;
+
+public class SavingAccount extends Account {
 
     private double interestRate=0.05;
 
     public SavingAccount() {
-       super("savings",0.0);
+        super(enAccountStatus.valueOf("savings"),0.0);
     }
 
     @Override
