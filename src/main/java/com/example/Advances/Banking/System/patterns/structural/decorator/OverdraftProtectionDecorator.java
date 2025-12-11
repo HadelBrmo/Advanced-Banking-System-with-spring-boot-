@@ -1,6 +1,7 @@
 package com.example.Advances.Banking.System.patterns.structural.decorator;
 
 //السحب المكشوف
+//فيك تسحب اكتر من رصيدك
 public class OverdraftProtectionDecorator extends AccountDecorator {
 
     private double overdraftLimit;

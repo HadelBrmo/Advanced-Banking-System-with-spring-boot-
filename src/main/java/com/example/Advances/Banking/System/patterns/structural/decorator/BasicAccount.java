@@ -3,7 +3,7 @@ package com.example.Advances.Banking.System.patterns.structural.decorator;
 
 public class BasicAccount implements BankAccount {
 
-    private String accountNumber;
+    private final String accountNumber;
     private double balance;
 
     public BasicAccount(String accountNumber, double initialBalance) {
