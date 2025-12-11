@@ -5,37 +5,22 @@ import com.example.Advances.Banking.System.core.enums.AccountType;
 import com.example.Advances.Banking.System.core.model.Account;
 import com.example.Advances.Banking.System.core.model.Customer;
 
-public class AccountFactoryImpl implements  AccountFactory{
+public class AccountFactoryImpl implements AccountFactory {
+
+
     @Override
     public Account createAccount(AccountType type, Customer customer, double balance) {
-        Account account = new Account();
-        account.setCustomer(customer);
-        account.setBalance(balance);
-        account.setStatus(AccountStatus.ACTIVE);
-        account.setAccountType(type);
         switch (type) {
             case SAVINGS:
-                account.setMinBalance(100.0);
-                account.setMaxDailyWithdrawal(2000.0);
-                break;
-
+                return new SavingsAccountFactory();
             case CHECKING:
-                account.setMinBalance(0.0);
-                account.setHasOverdraft(true);
-                account.setOverdraftLimit(500.0);
-                break;
-
+                return new CheckingAccountFactory();
             case LOAN:
-                account.setMinBalance(-10000.0);
-                account.setLoanTermMonths(60);
-                break;
-
+                return new LoanAccountFactory();
             case INVESTMENT:
-                account.setMinBalance(1000.0);
-                account.setRiskLevel("MEDIUM");
-                break;
+                return new InvestmentAccountFactory();
+            default:
+                throw new IllegalArgumentException("Unknown account type: " + type);
         }
-        return account;
     }
-
 }

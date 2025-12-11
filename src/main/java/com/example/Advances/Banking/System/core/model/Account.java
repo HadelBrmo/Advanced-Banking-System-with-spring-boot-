@@ -3,6 +3,7 @@ package com.example.Advances.Banking.System.core.model;
 import com.example.Advances.Banking.System.core.enums.AccountStatus;
 import com.example.Advances.Banking.System.core.enums.AccountType;
 import com.example.Advances.Banking.System.exception.InsufficientFundsException;
+import com.example.Advances.Banking.System.patterns.behavioral.observer.AccountSubject;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -45,6 +46,9 @@ public class Account {
     private Double overdraftLimit;
     private Integer loanTermMonths;
     private String riskLevel;
+
+    @Transient
+    private transient AccountSubject notificationSubject;
 
     public String getRiskLevel() {
         return riskLevel;
@@ -100,6 +104,7 @@ public class Account {
         this.balance = 0.0;
         this.createdAt = new Date();
         this.updatedAt = new Date();
+        this.notificationSubject = new AccountSubject(this.accountNumber);
     }
 
     public Account(AccountType accountType, Customer customer, double initialBalance) {
@@ -111,38 +116,101 @@ public class Account {
 
     public void deposit(double amount) {
         if (amount <= 0) {
+            notificationSubject.triggerEvent(
+                    "DEPOSIT_FAILED",
+                    amount,
+                    "Deposit failed: Amount must be positive"
+            );
             throw new IllegalArgumentException("Deposit amount must be positive");
         }
 
         if (!status.canTransact()) {
-            throw new IllegalStateException(
-                    String.format("Account %s is %s and cannot transact",
-                            accountNumber, status.getDescription())
+            String errorMsg = String.format("Account %s is %s and cannot transact",
+                    accountNumber, status.getDescription());
+            notificationSubject.triggerEvent(
+                    "TRANSACTION_BLOCKED",
+                    amount,
+                    errorMsg
             );
+            throw new IllegalStateException(errorMsg);
         }
 
         this.balance += amount;
         this.updatedAt = new Date();
+
+
+        notificationSubject.triggerEvent(
+                "DEPOSIT",
+                amount,
+                String.format("Deposit of $%.2f to account %s", amount, accountNumber)
+        );
+
+        if (balance > 10000) {
+            notificationSubject.triggerEvent(
+                    "HIGH_BALANCE",
+                    balance,
+                    "Account balance exceeded $10,000"
+            );
+        }
     }
+
 
     public void withdraw(double amount) {
         if (amount <= 0) {
+            notificationSubject.triggerEvent(
+                    "WITHDRAWAL_FAILED",
+                    amount,
+                    "Withdrawal failed: Amount must be positive"
+            );
             throw new IllegalArgumentException("Withdrawal amount must be positive");
         }
 
         if (!status.canTransact()) {
-            throw new IllegalStateException(
-                    String.format("Account %s is %s and cannot transact",
-                            accountNumber, status.getDescription())
+            String errorMsg = String.format("Account %s is %s and cannot transact",
+                    accountNumber, status.getDescription());
+            notificationSubject.triggerEvent(
+                    "TRANSACTION_BLOCKED",
+                    amount,
+                    errorMsg
             );
+            throw new IllegalStateException(errorMsg);
         }
 
         if (amount > balance) {
+            notificationSubject.triggerEvent(
+                    "INSUFFICIENT_FUNDS",
+                    amount,
+                    String.format("Withdrawal failed: Insufficient funds. Balance: $%.2f", balance)
+            );
             throw new InsufficientFundsException(accountNumber, balance, amount);
         }
 
         this.balance -= amount;
         this.updatedAt = new Date();
+
+
+        notificationSubject.triggerEvent(
+                "WITHDRAWAL",
+                amount,
+                String.format("Withdrawal of $%.2f from account %s", amount, accountNumber)
+        );
+
+
+        if (balance < 100) {
+            notificationSubject.triggerEvent(
+                    "LOW_BALANCE",
+                    balance,
+                    "Low balance alert: Account balance below $100"
+            );
+        }
+
+        if (amount > 5000) {
+            notificationSubject.triggerEvent(
+                    "LARGE_WITHDRAWAL",
+                    amount,
+                    "Large withdrawal detected: Over $5,000"
+            );
+        }
     }
 
 
@@ -181,6 +249,13 @@ public class Account {
 
     public Customer getCustomer() { return customer; }
     public void setCustomer(Customer customer) { this.customer = customer; }
+
+    public AccountSubject getNotificationSubject() {
+        if (notificationSubject == null) {
+            notificationSubject = new AccountSubject(accountNumber);
+        }
+        return notificationSubject;
+    }
 
     public Date getCreatedAt() { return createdAt; }
     public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
