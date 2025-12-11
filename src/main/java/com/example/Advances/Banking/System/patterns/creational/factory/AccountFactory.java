@@ -7,5 +7,5 @@ import com.example.Advances.Banking.System.core.model.Customer;
 
 public interface AccountFactory {
 
-    Account createAccount(AccountType type, Customer customer,double balance);
+     Account createAccount(AccountType type, Customer customer, double balance);
 }
