@@ -12,13 +12,14 @@ public class AccountFactoryImpl implements AccountFactory {
     public Account createAccount(AccountType type, Customer customer, double balance) {
         switch (type) {
             case SAVINGS:
-                return new SavingsAccountFactory();
+                SavingsAccountFactory factory = new SavingsAccountFactory();
+                return SavingsAccountFactory.createAccount(customer, balance);
             case CHECKING:
-                return new CheckingAccountFactory();
+                return CheckingAccountFactory.createAccount(customer, balance);
             case LOAN:
-                return new LoanAccountFactory();
+                return  LoanAccountFactory.createAccount(customer, balance);
             case INVESTMENT:
-                return new InvestmentAccountFactory();
+                return  InvestmentAccountFactory.createAccount(customer, balance);
             default:
                 throw new IllegalArgumentException("Unknown account type: " + type);
         }

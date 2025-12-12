@@ -6,9 +6,9 @@ import com.example.Advances.Banking.System.core.enums.AccountType;
 import com.example.Advances.Banking.System.core.model.Account;
 import com.example.Advances.Banking.System.core.model.Customer;
 
-public class CheckingAccountFactory extends Account {
+public class CheckingAccountFactory  {
 
-    public Account createAccount(Customer customer, double balance) {
+    public static Account createAccount(Customer customer, double balance) {
         Account account = new Account();
         account.setAccountType(AccountType.CHECKING);
         account.setCustomer(customer);
@@ -21,7 +21,7 @@ public class CheckingAccountFactory extends Account {
         account.setHasOverdraft(true);
         account.setOverdraftLimit(500.0);
 
-        System.out.println("🏦 Created CHECKING account for " + customer.getFullName());
+        System.out.println(" Created CHECKING account for " + customer.getFullName());
         return account;
     }
 

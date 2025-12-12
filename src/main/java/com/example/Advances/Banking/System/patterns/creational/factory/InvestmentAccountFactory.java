@@ -6,12 +6,12 @@ import com.example.Advances.Banking.System.core.enums.AccountType;
 import com.example.Advances.Banking.System.core.model.Account;
 import com.example.Advances.Banking.System.core.model.Customer;
 
-public class InvestmentAccountFactory extends Account {
-    public Account createAccount(Customer customer, double balance) {
+public class InvestmentAccountFactory  {
+    public static Account createAccount(Customer customer, double balance) {
         return createInvestmentAccount(customer, balance, "MODERATE");
     }
 
-    public Account createInvestmentAccount(Customer customer, double balance, String riskLevel) {
+    public static Account createInvestmentAccount(Customer customer, double balance, String riskLevel) {
         Account account = new Account();
         account.setAccountType(AccountType.INVESTMENT);
         account.setCustomer(customer);
@@ -22,7 +22,7 @@ public class InvestmentAccountFactory extends Account {
         account.setRiskLevel(riskLevel);
         account.setHasOverdraft(false);
 
-        System.out.println("📈 Created INVESTMENT account - Risk: " + riskLevel +
+        System.out.println(" Created INVESTMENT account - Risk: " + riskLevel +
                 ", Balance: $" + balance);
         return account;
     }
