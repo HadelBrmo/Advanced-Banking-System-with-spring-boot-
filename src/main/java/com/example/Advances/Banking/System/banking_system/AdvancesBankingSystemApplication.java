@@ -14,7 +14,7 @@ public class AdvancesBankingSystemApplication {
         System.out.println(" URL: http://localhost:8080");
         System.out.println(" Database: MySQL");
         System.out.println(" " + new java.util.Date());
-        System.out.println("=========================================");
+        System.out.println("//=========================================");
 	}
 
 }
