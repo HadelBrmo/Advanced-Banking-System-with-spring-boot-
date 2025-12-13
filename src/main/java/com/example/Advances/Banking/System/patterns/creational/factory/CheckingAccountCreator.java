@@ -1,20 +1,21 @@
 package com.example.Advances.Banking.System.patterns.creational.factory;
 
-
 import com.example.Advances.Banking.System.core.enums.AccountStatus;
 import com.example.Advances.Banking.System.core.enums.AccountType;
 import com.example.Advances.Banking.System.core.model.Account;
 import com.example.Advances.Banking.System.core.model.Customer;
+import org.springframework.stereotype.Component;
 
-public class CheckingAccountFactory  {
+@Component
+public class CheckingAccountCreator implements AccountCreator {
 
-    public static Account createAccount(Customer customer, double balance) {
+    @Override
+    public Account create(Customer customer, double balance) {
         Account account = new Account();
         account.setAccountType(AccountType.CHECKING);
         account.setCustomer(customer);
         account.setBalance(balance);
         account.setStatus(AccountStatus.ACTIVE);
-
 
         account.setMinBalance(0.0);
         account.setMaxDailyWithdrawal(2000.0);
@@ -25,12 +26,15 @@ public class CheckingAccountFactory  {
         return account;
     }
 
+    @Override
+    public boolean supports(AccountType type) {
+        return AccountType.CHECKING.equals(type);
+    }
 
     public Account createPremiumChecking(Customer customer, double balance) {
-        Account account = createAccount(customer, balance);
-        account.setOverdraftLimit(2000.0);
-        account.setMaxDailyWithdrawal(5000.0);
-        System.out.println(" Created PREMIUM checking account");
-        return account;
+        CheckingAccountCreator creator = new CheckingAccountCreator();
+        return creator.createPremiumChecking(customer, balance);
     }
+
+
 }

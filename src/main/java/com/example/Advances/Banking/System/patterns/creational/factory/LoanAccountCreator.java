@@ -1,27 +1,32 @@
 package com.example.Advances.Banking.System.patterns.creational.factory;
 
-
 import com.example.Advances.Banking.System.core.enums.AccountStatus;
 import com.example.Advances.Banking.System.core.enums.AccountType;
 import com.example.Advances.Banking.System.core.model.Account;
 import com.example.Advances.Banking.System.core.model.Customer;
+import org.springframework.stereotype.Component;
 
-public class LoanAccountFactory  {
-    private static int defaultTermMonths = 12;
+@Component
+public class LoanAccountCreator implements AccountCreator {
 
+    private static final int DEFAULT_TERM_MONTHS = 12;      //القيمة الاقترتضية 12 شهر
 
-    public static Account createAccount(Customer customer, double balance) {
-
-        return createLoanAccount(customer, balance, defaultTermMonths);
+    @Override
+    public Account create(Customer customer, double balance) {
+        return createLoanAccount(customer, balance, DEFAULT_TERM_MONTHS);
     }
 
-    public static Account createLoanAccount(Customer customer, double loanAmount, int termMonths) {
+    @Override
+    public boolean supports(AccountType type) {
+        return AccountType.LOAN.equals(type);
+    }
+
+    public Account createLoanAccount(Customer customer, double loanAmount, int termMonths) {
         Account account = new Account();
         account.setAccountType(AccountType.LOAN);
         account.setCustomer(customer);
         account.setBalance(loanAmount);
         account.setStatus(AccountStatus.ACTIVE);
-
 
         account.setMinBalance(-loanAmount);
         account.setLoanTermMonths(termMonths);
@@ -35,7 +40,7 @@ public class LoanAccountFactory  {
     public Account createShortTermLoan(Customer customer, double amount) {
         return createLoanAccount(customer, amount, 6);
     }
-
+   //قرض عقاري (رهن) 20 سنة ==240 شهر
     public Account createMortgageLoan(Customer customer, double amount) {
         Account account = createLoanAccount(customer, amount, 240);
         account.setLoanTermMonths(240);

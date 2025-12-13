@@ -1,13 +1,16 @@
 package com.example.Advances.Banking.System.patterns.creational.factory;
 
-// SavingsAccountFactory.java
 import com.example.Advances.Banking.System.core.enums.AccountStatus;
 import com.example.Advances.Banking.System.core.enums.AccountType;
 import com.example.Advances.Banking.System.core.model.Account;
 import com.example.Advances.Banking.System.core.model.Customer;
+import org.springframework.stereotype.Component;
 
-public class SavingsAccountFactory  {
-    public static Account createAccount(Customer customer, double balance) {
+@Component
+public class SavingsAccountCreator implements AccountCreator {
+
+    @Override
+    public Account create(Customer customer, double balance) {
         Account account = new Account();
         account.setAccountType(AccountType.SAVINGS);
         account.setCustomer(customer);
@@ -22,6 +25,8 @@ public class SavingsAccountFactory  {
         return account;
     }
 
-
-
+    @Override
+    public boolean supports(AccountType type) {
+        return AccountType.SAVINGS.equals(type);
+    }
 }
