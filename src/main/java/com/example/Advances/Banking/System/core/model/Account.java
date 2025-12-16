@@ -115,13 +115,22 @@ public class Account {
     }
 
     public void deposit(double amount) {
-        if (amount <= 0) {
+        if (amount < 0) {
             notificationSubject.triggerEvent(
                     "DEPOSIT_FAILED",
                     amount,
-                    "Deposit failed: Amount must be positive"
+                    "Deposit failed: Amount cannot be negative"
             );
-            throw new IllegalArgumentException("Deposit amount must be positive");
+            throw new IllegalArgumentException("Deposit amount cannot be negative");
+        }
+
+        if (amount == 0) {
+            notificationSubject.triggerEvent(
+                    "DEPOSIT",
+                    0.0,
+                    "Zero deposit - no balance change"
+            );
+            return;
         }
 
         if (!status.canTransact()) {

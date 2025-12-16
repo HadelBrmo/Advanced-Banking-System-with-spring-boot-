@@ -47,8 +47,20 @@ public class AccountGroup implements AccountComponent {
         System.out.println("تم توزيع إيداع " + amount + " على مجموعة " + groupName);
     }
 
+
     @Override
     public boolean withdraw(double amount) {
+
+        if (amount < 0) {
+            System.out.println("لا يمكن سحب مبلغ سالب");
+            return false;
+        }
+
+        if (amount == 0) {
+            System.out.println("سحب صفر - لا تغيير في الرصيد");
+            return true;
+        }
+
         if (getBalance() >= amount) {
             for (AccountComponent account : accounts) {
                 if (account.getBalance() >= amount) {
@@ -73,6 +85,10 @@ public class AccountGroup implements AccountComponent {
 
     @Override
     public void add(AccountComponent component) {
+        if (accounts.contains(component)) {
+            System.out.println("الحساب موجود مسبقاً في المجموعة " + groupName);
+            return;
+        }
         accounts.add(component);
         System.out.println("تم إضافة حساب إلى مجموعة " + groupName);
     }
