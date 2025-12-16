@@ -32,9 +32,19 @@ public class CheckingAccountCreator implements AccountCreator {
     }
 
     public Account createPremiumChecking(Customer customer, double balance) {
-        CheckingAccountCreator creator = new CheckingAccountCreator();
-        return creator.createPremiumChecking(customer, balance);
+        Account account = new Account();
+        account.setAccountType(AccountType.CHECKING);
+        account.setCustomer(customer);
+        account.setBalance(balance);
+        account.setStatus(AccountStatus.ACTIVE);
+
+        // Premium-specific settings
+        account.setMinBalance(0.0);
+        account.setMaxDailyWithdrawal(5000.0); // Higher limit for premium
+        account.setHasOverdraft(true);
+        account.setOverdraftLimit(2000.0); // Higher overdraft for premium
+
+        System.out.println(" Created PREMIUM checking account for " + customer.getFullName());
+        return account;
     }
-
-
 }

@@ -40,7 +40,7 @@ public class AccountSubject {
 
 
     public void triggerEvent(String eventType, double amount, String description) {
-        AccountEvent event = new AccountEvent(eventType, accountNumber, amount, description);
+        AccountEvent event = new AccountEvent(eventType, accountNumber, amount, description, "2024-01-15T10:30:00");
         notifyObservers(event);
     }
 

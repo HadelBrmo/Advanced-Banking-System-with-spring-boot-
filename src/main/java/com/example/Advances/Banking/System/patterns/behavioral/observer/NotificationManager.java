@@ -10,6 +10,11 @@ public class NotificationManager {
     private final Map<String, AccountSubject> accountSubjects = new HashMap<>();
 
     public AccountSubject registerAccount(String accountNumber) {
+        if (accountSubjects.containsKey(accountNumber)) {
+            System.out.println("[INFO] Account already registered: " + accountNumber);
+            return accountSubjects.get(accountNumber);
+        }
+
         AccountSubject subject = new AccountSubject(accountNumber);
         accountSubjects.put(accountNumber, subject);
         System.out.println("[INFO] Account registered for notifications: " + accountNumber);

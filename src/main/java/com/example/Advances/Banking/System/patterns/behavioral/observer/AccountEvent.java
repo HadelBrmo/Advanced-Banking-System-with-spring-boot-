@@ -11,7 +11,7 @@ public class AccountEvent {
     private final Date timestamp;
     private final String description;
 
-    public AccountEvent(String eventType, String accountNumber, double amount, String description) {
+    public AccountEvent(String eventType, String accountNumber, double amount, String description, String s) {
         this.eventType = eventType;
         this.accountNumber = accountNumber;
         this.amount = amount;
