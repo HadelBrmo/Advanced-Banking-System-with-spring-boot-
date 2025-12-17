@@ -3,7 +3,7 @@ package com.example.Advances.Banking.System.patterns.structural.decorator;
 
 public abstract class AccountDecorator implements BankAccount {
 
-    protected BankAccount decoratedAccount;
+    public BankAccount decoratedAccount;
 
     public AccountDecorator(BankAccount account) {
         this.decoratedAccount = account;
