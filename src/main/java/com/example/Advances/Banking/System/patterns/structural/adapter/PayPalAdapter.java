@@ -1,36 +1,33 @@
 package com.example.Advances.Banking.System.patterns.structural.adapter;
 
+import com.example.Advances.Banking.System.patterns.structural.adapter.models.*;
 
 public class PayPalAdapter extends PaymentGatewayAdapter {
-
     private final String paypalApiKey;
     private final String paypalSecret;
+    private final MerchantCredentials credentials;
 
     public PayPalAdapter() {
         super(new ExternalPaymentService("PayPal"), "PayPal Gateway");
         this.paypalApiKey = "paypal_live_ak_test123";
         this.paypalSecret = "paypal_live_sk_test456";
+        this.credentials = new MerchantCredentials(paypalApiKey, paypalSecret);
     }
 
     @Override
-    protected ExternalPaymentService.PaymentRequest createPaymentRequest(
+    public PaymentRequest createPaymentRequest(
             double amount, String currency, String customerId) {
 
-        ExternalPaymentService.PaymentRequest request = new ExternalPaymentService.PaymentRequest();
-        request.setPaymentAmount(amount);
-        request.setPaymentCurrency(currency);
-        request.setCustomerEmail(customerId + "@customer.bank");
-
-        return request;
+        return new PaymentRequest(amount, currency, customerId + "@customer.bank");
     }
 
     @Override
-    protected ExternalPaymentService.MerchantCredentials getCredentials() {
-        return new ExternalPaymentService.MerchantCredentials(paypalApiKey, paypalSecret);
+    public MerchantCredentials getCredentials() {
+        return credentials;
     }
 
     @Override
-    protected String convertStatus(String externalStatus) {
+    public String convertStatus(String externalStatus) {
         switch (externalStatus) {
             case "COMPLETED": return "SUCCESS";
             case "PENDING": return "PENDING";
