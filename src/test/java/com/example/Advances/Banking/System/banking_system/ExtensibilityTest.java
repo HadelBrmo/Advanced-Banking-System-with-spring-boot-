@@ -67,7 +67,6 @@ public class ExtensibilityTest {
         customer.setLastName("Test");
         customer.setEmail("extend@test.com");
 
-        // جرب الأنواع الجديدة (Extensibility)
         AccountType[] newTypes = {
                 AccountType.STUDENT,
                 AccountType.BUSINESS,
@@ -90,7 +89,6 @@ public class ExtensibilityTest {
         System.out.println("\n📊 Extensibility Result:");
         System.out.println("   Created " + createdCount + "/" + newTypes.length + " new account types");
 
-        // Extensibility requirement: على الأقل نوع واحد جديد يشتغل
         if (createdCount > 0) {
             System.out.println("✅ Extensibility PROVEN!");
             System.out.println("   Can add new account types WITHOUT modifying existing code");
