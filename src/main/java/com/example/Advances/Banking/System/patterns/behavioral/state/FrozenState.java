@@ -1,4 +1,15 @@
 package com.example.Advances.Banking.System.patterns.behavioral.state;
 
-public class FrozenState {
+
+
+public class FrozenState implements AccountState {
+    @Override
+    public void deposit(BankAccount account, double amount) {
+        System.out.println("Account is frozen. Cannot deposit.");
+    }
+
+    @Override
+    public void withdraw(BankAccount account, double amount) {
+        System.out.println("Account is frozen. Cannot withdraw.");
+    }
 }
