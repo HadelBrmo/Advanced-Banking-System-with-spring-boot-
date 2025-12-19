@@ -1,7 +1,4 @@
 package com.example.Advances.Banking.System.core.model;
-
-
-
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
