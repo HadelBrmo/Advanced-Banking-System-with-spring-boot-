@@ -55,6 +55,14 @@ public class Transaction {
         this.description = generateDescription();
     }
 
+    // ⭐⭐ Constructor جديد للاختبارات ⭐⭐
+    public Transaction(Double amount, String status) {
+        this.transactionId = generateTransactionId();
+        this.timestamp = new Date();
+        this.amount = amount;
+        this.status = status;
+    }
+
     // ===== Business Methods =====
     public void execute() {
         switch (type) {
@@ -109,7 +117,7 @@ public class Transaction {
         }
     }
 
-    // ===== Getters and Setters =====
+    // ===== Getters and Setters (مُصحَّح) =====
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -123,9 +131,11 @@ public class Transaction {
     public void setAmount(Double amount) { this.amount = amount; }
 
     public Account getFromAccount() { return fromAccount; }
+    // ⭐⭐ تصحيح: يجب أن يأخذ Account وليس String ⭐⭐
     public void setFromAccount(Account fromAccount) { this.fromAccount = fromAccount; }
 
     public Account getToAccount() { return toAccount; }
+    // ⭐⭐ تصحيح: يجب أن يأخذ Account وليس String ⭐⭐
     public void setToAccount(Account toAccount) { this.toAccount = toAccount; }
 
     public String getDescription() { return description; }
@@ -136,4 +146,29 @@ public class Transaction {
 
     public Date getTimestamp() { return timestamp; }
     public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
+
+    // ⭐⭐ Methods مساعدة للاختبارات ⭐⭐
+    public void setFromAccountNumber(String accountNumber) {
+        // هذه للاختبارات فقط
+        // في التطبيق الحقيقي، ستأخذ Account كاملاً
+        if (fromAccount == null) {
+            fromAccount = new Account();
+        }
+        fromAccount.setAccountNumber(accountNumber);
+    }
+
+    public void setToAccountNumber(String accountNumber) {
+        // هذه للاختبارات فقط
+        if (toAccount == null) {
+            toAccount = new Account();
+        }
+        toAccount.setAccountNumber(accountNumber);
+    }
+
+    // toString للمساعدة في الاختبارات
+    @Override
+    public String toString() {
+        return String.format("Transaction{id=%d, amount=%.2f, status='%s'}",
+                id, amount, status);
+    }
 }

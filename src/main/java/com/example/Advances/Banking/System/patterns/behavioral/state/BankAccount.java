@@ -10,4 +10,8 @@ public class BankAccount {
 
     public void deposit(double amount) { state.deposit(this, amount); }
     public void withdraw(double amount) { state.withdraw(this, amount); }
+
+    public AccountState getState() {
+        return state;
+    }
 }
