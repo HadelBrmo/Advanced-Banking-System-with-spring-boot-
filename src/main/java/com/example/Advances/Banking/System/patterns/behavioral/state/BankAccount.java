@@ -2,7 +2,7 @@ package com.example.Advances.Banking.System.patterns.behavioral.state;
 
 public class BankAccount {
     private double balance = 0.0;
-    private AccountState state = new ActiveState(); // الحالة الافتراضية
+    private AccountState state = new ActiveState();
 
     public void setState(AccountState state) { this.state = state; }
     public double getBalance() { return balance; }
