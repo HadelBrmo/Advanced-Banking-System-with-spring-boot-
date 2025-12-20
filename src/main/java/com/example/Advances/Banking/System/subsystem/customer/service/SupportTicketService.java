@@ -91,7 +91,6 @@ public class SupportTicketService {
     }
 
     private void sendTicketCreatedNotification(SupportTicket ticket) {
-        // Implementation for notification
         if (notificationManager != null && ticket.getCustomer() != null) {
             notificationManager.sendEvent(
                     ticket.getCustomer().getEmail(),
