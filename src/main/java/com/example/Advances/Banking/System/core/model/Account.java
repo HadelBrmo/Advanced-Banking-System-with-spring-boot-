@@ -5,10 +5,18 @@ import com.example.Advances.Banking.System.core.enums.AccountType;
 import com.example.Advances.Banking.System.exception.InsufficientFundsException;
 import com.example.Advances.Banking.System.patterns.behavioral.observer.AccountSubject;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "accounts")
+@Data
+@AllArgsConstructor
+@Builder
 public class Account {
 
     @Id
@@ -39,7 +47,6 @@ public class Account {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-
     private Double minBalance;
     private Double maxDailyWithdrawal;
     private Boolean hasOverdraft;
@@ -50,54 +57,7 @@ public class Account {
     @Transient
     private transient AccountSubject notificationSubject;
 
-    public String getRiskLevel() {
-        return riskLevel;
-    }
-
-    public void setRiskLevel(String riskLevel) {
-        this.riskLevel = riskLevel;
-    }
-
-    public Integer getLoanTermMonths() {
-        return loanTermMonths;
-    }
-
-    public void setLoanTermMonths(Integer loanTermMonths) {
-        this.loanTermMonths = loanTermMonths;
-    }
-
-    public Double getOverdraftLimit() {
-        return overdraftLimit;
-    }
-
-    public void setOverdraftLimit(Double overdraftLimit) {
-        this.overdraftLimit = overdraftLimit;
-    }
-
-    public Boolean getHasOverdraft() {
-        return hasOverdraft;
-    }
-
-    public void setHasOverdraft(Boolean hasOverdraft) {
-        this.hasOverdraft = hasOverdraft;
-    }
-
-    public Double getMaxDailyWithdrawal() {
-        return maxDailyWithdrawal;
-    }
-
-    public void setMaxDailyWithdrawal(Double maxDailyWithdrawal) {
-        this.maxDailyWithdrawal = maxDailyWithdrawal;
-    }
-
-    public Double getMinBalance() {
-        return minBalance;
-    }
-
-    public void setMinBalance(Double minBalance) {
-        this.minBalance = minBalance;
-    }
-
+    // ⭐⭐ إبقاء Constructors ⭐⭐
     public Account() {
         this.accountNumber = generateAccountNumber();
         this.status = AccountStatus.ACTIVE;
@@ -235,41 +195,11 @@ public class Account {
                 (int)(Math.random() * 1000);
     }
 
+
+
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = new Date();
     }
 
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getAccountNumber() { return accountNumber; }
-    public void setAccountNumber(String accountNumber) { this.accountNumber = accountNumber; }
-
-    public AccountType getAccountType() { return accountType; }
-    public void setAccountType(AccountType accountType) { this.accountType = accountType; }
-
-    public AccountStatus getStatus() { return status; }
-    public void setStatus(AccountStatus status) { this.status = status; }
-
-    public Double getBalance() { return balance; }
-    public void setBalance(Double balance) { this.balance = balance; }
-
-    public Customer getCustomer() { return customer; }
-    public void setCustomer(Customer customer) { this.customer = customer; }
-
-    public AccountSubject getNotificationSubject() {
-        if (notificationSubject == null) {
-            notificationSubject = new AccountSubject(accountNumber);
-        }
-        return notificationSubject;
-    }
-
-    public Date getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
-
-    public Date getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
 }
-

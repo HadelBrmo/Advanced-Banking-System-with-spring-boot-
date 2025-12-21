@@ -1,14 +1,16 @@
 package com.example.Advances.Banking.System.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-// هذا يقابل: exception/ → AccountNotFoundException.java
-public class AccountNotFoundException extends BankingException {
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class AccountNotFoundException extends RuntimeException {
 
-    public AccountNotFoundException(String accountId) {
-        super(
-                String.format("Account with ID %s not found", accountId),
-                "ACCOUNT_NOT_FOUND",
-                404
-        );
+    public AccountNotFoundException(String accountNumber) {
+        super("Account not found: " + accountNumber);
+    }
+
+    public AccountNotFoundException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

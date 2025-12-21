@@ -26,7 +26,6 @@
         <testng.version>7.8.0</testng.version>
         <springdoc.version>2.2.0</springdoc.version>
         <caffeine.version>3.1.8</caffeine.version>
-        <checkstyle.version>3.2.2</checkstyle.version>
     </properties>
 
     <dependencies>
@@ -62,7 +61,7 @@
             <artifactId>HikariCP</artifactId>
         </dependency>
 
-        <!-- ⭐ Lombok للمحافظة على الكود (Maintainability) -->
+        <!-- ⭐⭐⭐ Lombok للمحافظة على الكود (Maintainability) ⭐⭐⭐ -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -181,7 +180,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>

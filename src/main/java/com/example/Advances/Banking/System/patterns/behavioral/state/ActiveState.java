@@ -1,4 +1,5 @@
 package com.example.Advances.Banking.System.patterns.behavioral.state;
+
 public class ActiveState implements AccountState {
     @Override
     public void deposit(BankAccount account, double amount) {
@@ -14,5 +15,10 @@ public class ActiveState implements AccountState {
             account.setBalance(account.getBalance() - amount);
             System.out.println("Withdrawn: " + amount);
         }
+    }
+
+    @Override
+    public String getStateName() {
+        return "ACTIVE";
     }
 }

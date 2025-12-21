@@ -10,4 +10,9 @@ public class SuspendedState implements AccountState {
     public void withdraw(BankAccount account, double amount) {
         System.out.println("Account is suspended. Withdrawal not allowed.");
     }
+
+    @Override
+    public String getStateName() {
+        return "SUSPENDED";
+    }
 }

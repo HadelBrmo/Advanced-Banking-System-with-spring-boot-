@@ -1,11 +1,21 @@
 package com.example.Advances.Banking.System.core.model;
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+// ===== AFTER (مع Lombok) =====
 @Entity
 @Table(name = "customers")
+@Data
+@AllArgsConstructor
+@Builder
 public class Customer {
 
     @Id
@@ -25,7 +35,6 @@ public class Customer {
     private String email;
 
     private String phone;
-
     private String address;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,7 +45,6 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Account> accounts = new ArrayList<>();
-
 
     public Customer() {
         this.customerId = generateCustomerId();
@@ -52,8 +60,7 @@ public class Customer {
     }
 
     private String generateCustomerId() {
-        return "CUST-" + System.currentTimeMillis() + "-" +
-                (int)(Math.random() * 1000);
+        return "CUST-" + System.currentTimeMillis() + "-" + (int)(Math.random() * 1000);
     }
 
     public String getFullName() {
@@ -71,38 +78,9 @@ public class Customer {
         this.updatedAt = new Date();
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getCustomerId() { return customerId; }
-    public void setCustomerId(String customerId) { this.customerId = customerId; }
-
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-
-    public String getLastName() { return lastName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
-
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-
-    public Date getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
-
-    public Date getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
-
-    public List<Account> getAccounts() { return accounts; }
-    public void setAccounts(List<Account> accounts) { this.accounts = accounts; }
-
     public void addAccount(Account account) {
         accounts.add(account);
         account.setCustomer(this);
     }
+
 }

@@ -14,7 +14,7 @@ import java.util.List;
 public class TransactionService {
     private static final Logger log = LoggerFactory.getLogger(TransactionService.class);
 
-    public Transaction processTransfer(TransferRequest request) {
+    public static Transaction processTransfer(TransferRequest request) {
         log.info("💰 Processing transfer from {} to {}, Amount: ${}",
                 request.getFromAccount(), request.getToAccount(), request.getAmount());
 
@@ -46,7 +46,7 @@ public class TransactionService {
     }
 
     // إنشاء Account مؤقت من رقم الحساب
-    private Account createTempAccount(String accountNumber) {
+    private static Account createTempAccount(String accountNumber) {
         Account account = new Account();
         account.setAccountNumber(accountNumber);
         account.setBalance(5000.0);  // رصيد افتراضي
@@ -54,7 +54,7 @@ public class TransactionService {
         return account;
     }
 
-    private void validateBasicRequirements(TransferRequest request) {
+    private static void validateBasicRequirements(TransferRequest request) {
         if (request.getFromAccount() == null || request.getFromAccount().isEmpty()) {
             throw new IllegalArgumentException("From account is required");
         }
@@ -67,7 +67,7 @@ public class TransactionService {
     }
 
     @Async
-    public void processPostTransferTasksAsync(Transaction transaction) {
+    public static void processPostTransferTasksAsync(Transaction transaction) {
         log.info("🔄 Starting async processing for transaction");
 
         try {

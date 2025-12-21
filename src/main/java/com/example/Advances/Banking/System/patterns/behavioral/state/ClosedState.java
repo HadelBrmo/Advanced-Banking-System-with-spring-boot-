@@ -10,4 +10,9 @@ public class ClosedState implements AccountState {
     public void withdraw(BankAccount account, double amount) {
         System.out.println("Account is closed. No operations allowed.");
     }
+
+    @Override
+    public String getStateName() {
+        return "CLOSED";
+    }
 }
