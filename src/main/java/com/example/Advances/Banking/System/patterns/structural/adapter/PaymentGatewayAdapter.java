@@ -13,7 +13,6 @@ public abstract class PaymentGatewayAdapter implements PaymentGateway {
 
     @Override
     public String processPayment(double amount, String currency, String customerId) {
-        // التحقق من المدخلات
         if (amount <= 0) throw new IllegalArgumentException("Amount must be positive");
         if (currency == null || currency.trim().isEmpty()) throw new IllegalArgumentException("Currency required");
         if (customerId == null || customerId.trim().isEmpty()) throw new IllegalArgumentException("Customer ID required");

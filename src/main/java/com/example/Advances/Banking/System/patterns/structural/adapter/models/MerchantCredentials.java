@@ -1,5 +1,8 @@
 package com.example.Advances.Banking.System.patterns.structural.adapter.models;
 
+import lombok.Getter;
+
+@Getter
 public class MerchantCredentials {
     private final String apiKey;
     private final String secretKey;
@@ -8,9 +11,6 @@ public class MerchantCredentials {
         this.apiKey = apiKey;
         this.secretKey = secretKey;
     }
-
-    public String getApiKey() { return apiKey; }
-    public String getSecretKey() { return secretKey; }
 
     @Override
     public String toString() {

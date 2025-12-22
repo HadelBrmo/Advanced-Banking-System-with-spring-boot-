@@ -1,12 +1,15 @@
 package com.example.Advances.Banking.System.patterns.structural.composite;
 
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AccountGroup implements AccountComponent {
 
+    @Getter
     private final String groupName;
     private final String groupCode;
     private final List<AccountComponent> accounts = new ArrayList<>();
@@ -128,7 +131,4 @@ public class AccountGroup implements AccountComponent {
         return accounts.size();
     }
 
-    public String getGroupName() {
-        return groupName;
-    }
 }

@@ -1,21 +1,18 @@
 package com.example.Advances.Banking.System.patterns.structural.adapter.models;
 
+import lombok.Getter;
+
+@Getter
 public class PaymentResponse {
     private final boolean success;
     private final String transactionId;
     private final String message;
 
-    // Immutable object
     public PaymentResponse(boolean success, String transactionId, String message) {
         this.success = success;
         this.transactionId = transactionId;
         this.message = message;
     }
-
-
-    public boolean isSuccess() { return success; }
-    public String getTransactionId() { return transactionId; }
-    public String getMessage() { return message; }
 
 
     public static PaymentResponse success(String transactionId) {

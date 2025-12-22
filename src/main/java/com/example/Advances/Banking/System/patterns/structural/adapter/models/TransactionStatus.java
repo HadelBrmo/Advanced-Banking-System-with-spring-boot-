@@ -1,5 +1,8 @@
 package com.example.Advances.Banking.System.patterns.structural.adapter.models;
 
+import lombok.Getter;
+
+@Getter
 public class TransactionStatus {
     private final String status;
     private final long timestamp;
@@ -14,11 +17,6 @@ public class TransactionStatus {
         this.timestamp = timestamp;
         this.externalTransactionId = externalTransactionId;
     }
-
-
-    public String getStatus() { return status; }
-    public long getTimestamp() { return timestamp; }
-    public String getExternalTransactionId() { return externalTransactionId; }
 
 
     public boolean isCompleted() {

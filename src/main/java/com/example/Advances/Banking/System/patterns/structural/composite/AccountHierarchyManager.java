@@ -3,7 +3,7 @@ package com.example.Advances.Banking.System.patterns.structural.composite;
 
 public class AccountHierarchyManager {
 
-    private AccountComponent rootAccount;
+    private final AccountComponent rootAccount;
 
     public AccountHierarchyManager(AccountComponent rootAccount) {
         this.rootAccount = rootAccount;

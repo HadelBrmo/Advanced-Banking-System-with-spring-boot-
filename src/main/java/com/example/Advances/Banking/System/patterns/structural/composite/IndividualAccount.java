@@ -2,9 +2,12 @@ package com.example.Advances.Banking.System.patterns.structural.composite;
 
 import com.example.Advances.Banking.System.core.model.Account;
 import com.example.Advances.Banking.System.core.enums.AccountType;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class IndividualAccount implements AccountComponent {
 
     private final Account account;
@@ -74,7 +77,4 @@ public class IndividualAccount implements AccountComponent {
                 " Balance" + getBalance() + ")");
     }
 
-    public Account getAccount() {
-        return account;
-    }
 }

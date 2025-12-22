@@ -34,7 +34,6 @@ public class StripeAdapter extends PaymentGatewayAdapter {
 
     @Override
     public String convertStatus(String externalStatus) {
-        // حل المشكلة: تحقق من null قبل استخدام switch
         if (externalStatus == null) {
             return "UNKNOWN";
         }

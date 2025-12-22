@@ -3,12 +3,7 @@ package com.example.Advances.Banking.System.patterns.structural.composite;
 
 import java.util.List;
 
-
-
- //  "Handle account hierarchy"
-
 public interface AccountComponent {
-
 
     String getAccountNumber();
     String getAccountName();
