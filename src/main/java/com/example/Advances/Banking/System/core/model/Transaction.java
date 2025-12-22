@@ -41,12 +41,11 @@ public class Transaction {
     private String description;
 
     @Column(nullable = false)
-    private String status; // PENDING, COMPLETED, FAILED, CANCELLED
+    private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
-    // ===== Constructors =====
     public Transaction() {
         this.transactionId = generateTransactionId();
         this.timestamp = new Date();
@@ -120,7 +119,5 @@ public class Transaction {
                 return type.getDescription() + " transaction";
         }
     }
-
-
 
 }

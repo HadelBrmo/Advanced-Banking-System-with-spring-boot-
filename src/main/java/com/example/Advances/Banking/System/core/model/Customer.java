@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-// ===== AFTER (مع Lombok) =====
 @Entity
 @Table(name = "customers")
 @Data

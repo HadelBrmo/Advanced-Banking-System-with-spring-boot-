@@ -1,9 +1,14 @@
 package com.example.Advances.Banking.System.patterns.structural.decorator;
 
+import lombok.Getter;
+
+//السحب المكشوف
 public class OverdraftProtectionDecorator extends AccountDecorator {
 
+    @Getter
     private double overdraftLimit;
     private double overdraftFee;
+    @Getter
     private double currentOverdraftUsed;
 
     public OverdraftProtectionDecorator(BankAccount account, double limit) {
@@ -80,21 +85,8 @@ public class OverdraftProtectionDecorator extends AccountDecorator {
         return decoratedAccount.getMonthlyFee() + 2.0;
     }
 
-    @Override
-    public String getAccountNumber() {
-        return decoratedAccount.getAccountNumber();
-    }
-
-    public double getOverdraftLimit() {
-        return overdraftLimit;
-    }
-
     public double getAvailableOverdraft() {
         return Math.max(0, overdraftLimit - currentOverdraftUsed);
-    }
-
-    public double getCurrentOverdraftUsed() {
-        return currentOverdraftUsed;
     }
 
     public double getTotalAvailableBalance() {

@@ -20,6 +20,7 @@ public enum AccountStatus {
         return description;
     }
 
+    //validation
     public boolean canTransact() {
         return canTransact;
     }

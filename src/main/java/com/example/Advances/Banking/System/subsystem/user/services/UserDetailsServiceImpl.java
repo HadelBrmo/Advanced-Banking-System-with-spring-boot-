@@ -1,8 +1,8 @@
-package com.example.Advances.Banking.System.service;
+package com.example.Advances.Banking.System.subsystem.user.services;
 
 
 import com.example.Advances.Banking.System.core.model.User;
-import com.example.Advances.Banking.System.repository.UserRepository;
+import com.example.Advances.Banking.System.subsystem.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .roles(user.getRole())
+                .roles(String.valueOf(user.getRole()))
                 .build();
     }
 }

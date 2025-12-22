@@ -3,7 +3,7 @@ package com.example.Advances.Banking.System.patterns.structural.decorator;
 //كلاس للتغطية التامينية اذا صارت مشكلة بالحساب تبعك
 public class InsuranceDecorator extends AccountDecorator {
 
-    private double coverageAmount;
+    private final double coverageAmount;
 
     public InsuranceDecorator(BankAccount account, double coverage) {
         super(account);

@@ -1,4 +1,9 @@
 package com.example.Advances.Banking.System.core.enums;
 
-public class UserRole {
+public enum UserRole {
+    CUSTOMER,
+    TELLER,
+    MANAGER,
+    ADMIN,
+    AUDITOR
 }

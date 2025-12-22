@@ -1,11 +1,17 @@
 package com.example.Advances.Banking.System.core.model;
 
 import jakarta.persistence.Embeddable;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
+@Setter
+@Getter
 @Embeddable
 public  class TicketResponse {
+
+    //المؤلف/المرسل: الشخص الذي كتب الرد على التذكرة
     private String author;
     private String message;
     private boolean fromCustomer;
@@ -21,17 +27,4 @@ public  class TicketResponse {
         this.message = message;
         this.fromCustomer = fromCustomer;
     }
-
-    // Getters and Setters
-    public String getAuthor() { return author; }
-    public void setAuthor(String author) { this.author = author; }
-
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
-
-    public boolean isFromCustomer() { return fromCustomer; }
-    public void setFromCustomer(boolean fromCustomer) { this.fromCustomer = fromCustomer; }
-
-    public Date getTimestamp() { return timestamp; }
-    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
 }

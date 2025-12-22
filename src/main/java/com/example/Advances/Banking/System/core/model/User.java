@@ -1,40 +1,33 @@
 package com.example.Advances.Banking.System.core.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.example.Advances.Banking.System.core.enums.UserRole;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "users")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-
     @Id
+    @Column(unique = true, nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
-    private String role;
 
-    // 🔽 Getter و Setter لـ username
-    public String getUsername() {
-        return username;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserRole role;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    private String fullName;
+    private String email;
+    private Boolean enabled;
 
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

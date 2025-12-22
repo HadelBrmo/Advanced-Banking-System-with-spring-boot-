@@ -1,5 +1,6 @@
 //package com.example.Advances.Banking.System.admin_test;
 //
+//import com.example.Advances.Banking.System.banking_system.AdvancesBankingSystemApplication;
 //import com.example.Advances.Banking.System.subsystem.admin.dto.AccountRequest;
 //import com.example.Advances.Banking.System.subsystem.admin.dto.AccountStateChangeRequest;
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +14,8 @@
 //
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//@SpringBootTest
+//
+//@SpringBootTest(classes = AdvancesBankingSystemApplication.class)  // أضف هذا
 //@AutoConfigureMockMvc
 //public class AdminSecurityTest {
 //

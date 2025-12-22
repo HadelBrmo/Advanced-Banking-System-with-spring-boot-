@@ -1,4 +1,4 @@
-package com.example.Advances.Banking.System.repository;
+package com.example.Advances.Banking.System.subsystem.user.repository;
 
 
 import com.example.Advances.Banking.System.core.model.User;

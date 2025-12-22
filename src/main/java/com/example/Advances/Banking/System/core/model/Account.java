@@ -15,8 +15,8 @@ import java.util.Date;
 @Entity
 @Table(name = "accounts")
 @Data
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
 public class Account {
 
     @Id
@@ -57,7 +57,6 @@ public class Account {
     @Transient
     private transient AccountSubject notificationSubject;
 
-    // ⭐⭐ إبقاء Constructors ⭐⭐
     public Account() {
         this.accountNumber = generateAccountNumber();
         this.status = AccountStatus.ACTIVE;
