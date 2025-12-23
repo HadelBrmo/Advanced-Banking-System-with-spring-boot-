@@ -2,6 +2,8 @@ package com.example.Advances.Banking.System.subsystem.account.service;
 
 import com.example.Advances.Banking.System.core.enums.AccountStatus;
 import com.example.Advances.Banking.System.core.model.Account;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,12 +12,12 @@ public class AccountModificationService {
         public void modifyAccountSettings(Account account, AccountModificationRequest request) {
             System.out.println("✏️ Modifying account: " + account.getAccountNumber());
 
-            // التحقق من صلاحية التعديل
+
             if (!canModifyAccount(account)) {
                 throw new IllegalStateException("Cannot modify account. Status: " + account.getStatus());
             }
 
-            // تطبيق التعديلات
+
             if (request.getNewMinBalance() != null) {
                 account.setMinBalance(request.getNewMinBalance());
                 System.out.println("  → Min balance updated to: $" + request.getNewMinBalance());
@@ -38,14 +40,11 @@ public class AccountModificationService {
             System.out.println("✅ Account modification completed");
         }
 
-        /**
-         * تغيير حالة الحساب (Active, Frozen, Suspended)
-         */
+
         public void changeAccountStatus(Account account, AccountStatus newStatus, String reason) {
             System.out.println("🔄 Changing account status from " +
                     account.getStatus() + " to " + newStatus);
 
-            // التحقق من صلاحية تغيير الحالة
             validateStatusTransition(account.getStatus(), newStatus);
 
             account.setStatus(newStatus);
@@ -85,19 +84,13 @@ public class AccountModificationService {
     }
 
 
+    @Setter
+    @Getter
     class AccountModificationRequest {
         private Double newMinBalance;
         private Double newMaxWithdrawal;
         private Double overdraftLimit;
 
 
-        public Double getNewMinBalance() { return newMinBalance; }
-        public void setNewMinBalance(Double newMinBalance) { this.newMinBalance = newMinBalance; }
-
-        public Double getNewMaxWithdrawal() { return newMaxWithdrawal; }
-        public void setNewMaxWithdrawal(Double newMaxWithdrawal) { this.newMaxWithdrawal = newMaxWithdrawal; }
-
-        public Double getOverdraftLimit() { return overdraftLimit; }
-        public void setOverdraftLimit(Double overdraftLimit) { this.overdraftLimit = overdraftLimit; }
     }
 

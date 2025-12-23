@@ -24,13 +24,13 @@ public class AccountClosureService {
             throw new IllegalStateException("Cannot close account. Balance must be zero.");
         }
 
-        // تغيير الحالة
+
         account.setStatus(AccountStatus.CLOSED);
 
-        // تسجيل في السجلات
+
         logAccountClosure(account, closureReason);
 
-        // إرسال إشعار
+
         sendClosureNotification(account, closureReason);
 
         System.out.println("✅ Account closed successfully");
@@ -41,7 +41,7 @@ public class AccountClosureService {
 
         account.setStatus(AccountStatus.FROZEN);
 
-        // إرسال إشعار
+
         notificationManager.sendEvent(
                 account.getAccountNumber(),
                 "ACCOUNT_FROZEN",
