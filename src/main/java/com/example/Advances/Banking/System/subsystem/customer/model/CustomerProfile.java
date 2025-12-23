@@ -26,5 +26,4 @@ public class CustomerProfile {
     private Double averageMonthlySavings;
     private Date lastAnalysisDate;
 
-    // Constructors, Getters, Setters
 }

@@ -6,10 +6,15 @@ import com.example.Advances.Banking.System.core.enums.TicketStatus;
 import com.example.Advances.Banking.System.core.model.Customer;
 import com.example.Advances.Banking.System.core.model.TicketResponse;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "support_tickets")
 public class SupportTicket {
@@ -125,6 +130,7 @@ public class SupportTicket {
         this.updatedAt = new Date();
     }
 
+    //تصعيد
     public void escalate() {
         if (this.priority == TicketPriority.LOW) {
             this.priority = TicketPriority.MEDIUM;
@@ -142,49 +148,6 @@ public class SupportTicket {
         return status == TicketStatus.OPEN || status == TicketStatus.IN_PROGRESS;
     }
 
-
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getTicketNumber() { return ticketNumber; }
-    public void setTicketNumber(String ticketNumber) { this.ticketNumber = ticketNumber; }
-
-    public Customer getCustomer() { return customer; }
-    public void setCustomer(Customer customer) { this.customer = customer; }
-
-    public TicketCategory getCategory() { return category; }
-    public void setCategory(TicketCategory category) { this.category = category; }
-
-    public TicketPriority getPriority() { return priority; }
-    public void setPriority(TicketPriority priority) { this.priority = priority; }
-
-    public TicketStatus getStatus() { return status; }
-    public void setStatus(TicketStatus status) { this.status = status; }
-
-    public String getSubject() { return subject; }
-    public void setSubject(String subject) { this.subject = subject; }
-
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-
-    public String getAssignedTo() { return assignedTo; }
-    public void setAssignedTo(String assignedTo) { this.assignedTo = assignedTo; }
-
-    public String getResolutionNotes() { return resolutionNotes; }
-    public void setResolutionNotes(String resolutionNotes) { this.resolutionNotes = resolutionNotes; }
-
-    public Date getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
-
-    public Date getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
-
-    public Date getResolvedAt() { return resolvedAt; }
-    public void setResolvedAt(Date resolvedAt) { this.resolvedAt = resolvedAt; }
-
-    public List<TicketResponse> getResponses() { return responses; }
-    public void setResponses(List<TicketResponse> responses) { this.responses = responses; }
 
     @PreUpdate
     protected void onUpdate() {
