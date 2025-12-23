@@ -21,7 +21,6 @@ public class SystemHealthMonitor {
     private final DataSource dataSource;
 
     @Scheduled(fixedRate = 60000)
-    // وظيفة رئيسية: مراقبة صحة النظام كل دقيقة
     public void monitorSystemHealth() {
         checkDatabaseHealth();
         checkMemoryUsage();

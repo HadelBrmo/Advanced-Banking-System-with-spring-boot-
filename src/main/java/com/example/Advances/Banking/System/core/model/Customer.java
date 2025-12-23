@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "customers")
 @Data
 @AllArgsConstructor
-@Builder
+
 public class Customer {
 
     @Id

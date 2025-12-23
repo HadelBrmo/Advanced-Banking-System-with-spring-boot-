@@ -1,8 +1,11 @@
 package com.example.Advances.Banking.System.patterns.behavioral.observer;
 
 
+import lombok.Getter;
+
 import java.util.Date;
 
+@Getter
 public class AccountEvent {
 
     private final String eventType;
@@ -19,12 +22,6 @@ public class AccountEvent {
         this.description = description;
     }
 
-
-    public String getEventType() { return eventType; }
-    public String getAccountNumber() { return accountNumber; }
-    public double getAmount() { return amount; }
-    public Date getTimestamp() { return timestamp; }
-    public String getDescription() { return description; }
 
     @Override
     public String toString() {

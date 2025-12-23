@@ -1,0 +1,57 @@
+package com.example.Advances.Banking.System.subsystem.admin.dto;
+
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ApiResponse<T> {
+    private boolean success;
+    private String message;
+    private T data;
+    private String errorCode;
+
+    @Builder.Default
+    private LocalDateTime timestamp = LocalDateTime.now();
+
+    // Static helper methods
+    public static <T> ApiResponse<T> success(T data) {
+        return ApiResponse.<T>builder()
+                .success(true)
+                .message("Operation completed successfully")
+                .data(data)
+                .build();
+    }
+
+    public static <T> ApiResponse<T> success(String message, T data) {
+        return ApiResponse.<T>builder()
+                .success(true)
+                .message(message)
+                .data(data)
+                .build();
+    }
+
+    public static ApiResponse<?> error(String message) {
+        return error(message, "OPERATION_FAILED");
+    }
+
+    public static ApiResponse<?> error(String message, String errorCode) {
+        return ApiResponse.builder()
+                .success(false)
+                .message(message)
+                .errorCode(errorCode)
+                .build();
+    }
+
+    public static ApiResponse<?> validationError(String message) {
+        return error(message, "VALIDATION_ERROR");
+    }
+}

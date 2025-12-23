@@ -27,6 +27,7 @@ public class SMSNotifier implements AccountObserver {
         return "SMSNotifier-" + phoneNumber;
     }
 
+    //security
     private String maskPhoneNumber(String phone) {
         if (phone.length() > 4) {
             return "***" + phone.substring(phone.length() - 4);

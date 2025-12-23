@@ -22,21 +22,17 @@ class ObserverPatternIntegrationTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        // Create real observers
         EmailNotifier emailNotifier = new EmailNotifier("test@example.com", "Test User");
         SMSNotifier smsNotifier = new SMSNotifier("+963987654321");
         InAppNotifier inAppNotifier = new InAppNotifier("test-user-123");
 
-        // Register and attach
         AccountSubject subject = notificationManager.registerAccount("ACC-INTEGRATION");
         subject.attach(emailNotifier);
         subject.attach(smsNotifier);
         subject.attach(inAppNotifier);
 
-        // Trigger event
         subject.triggerEvent("INTEGRATION_TEST", 1234.56, "Integration test");
 
-        // Verify all notifications
         String output = outContent.toString();
         assertAll(
                 () -> assertTrue(output.contains("[EMAIL]"), "Email should be triggered"),

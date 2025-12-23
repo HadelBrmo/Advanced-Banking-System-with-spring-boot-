@@ -1,5 +1,6 @@
 package com.example.Advances.Banking.System.patterns.behavioral.chainofresponsibility;
 
+//المدير التفيذي اعلى من المدير يعني
 public class DirectorApprovalHandler extends ApprovalHandler {
     @Override
     public void handleRequest(double amount) {

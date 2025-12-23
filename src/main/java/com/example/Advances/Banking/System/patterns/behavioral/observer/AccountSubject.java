@@ -1,11 +1,14 @@
 package com.example.Advances.Banking.System.patterns.behavioral.observer;
 
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AccountSubject {
 
+    @Getter
     private final String accountNumber;
     private final List<AccountObserver> observers = new ArrayList<>();
 
@@ -44,7 +47,6 @@ public class AccountSubject {
         notifyObservers(event);
     }
 
-    public String getAccountNumber() { return accountNumber; }
     public List<AccountObserver> getObservers() { return new ArrayList<>(observers); }
     public int getObserverCount() { return observers.size(); }
 }
